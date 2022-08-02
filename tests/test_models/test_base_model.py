@@ -75,3 +75,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(m_json["created_at"], str)
         self.assertIsInstance(m_json["updated_at"], str)
         self.assertIn("__class__", m_json)
+
+
+if __name__ == "__main__":
+    unittest.main()
