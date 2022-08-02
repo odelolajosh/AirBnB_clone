@@ -5,6 +5,7 @@ This module provides the `BaseModel` class.
 
 from datetime import datetime
 import uuid
+from models import storage
 
 
 class BaseModel:
@@ -25,6 +26,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """Return the string representation of the class"""
@@ -33,6 +35,7 @@ class BaseModel:
 
     def save(self):
         """Persists instance"""
+        storage.save()
         self.updated_at = datetime.now()
 
     def to_dict(self):
