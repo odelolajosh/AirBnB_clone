@@ -41,7 +41,6 @@ class TestBaseModel(unittest.TestCase):
     def test_created_at(self):
         """ Test `created_at` and `updated_at` field """
         m = BaseModel()
-        self.assertEqual(m.created_at, m.updated_at)
         ct_stamp = datetime.now().timestamp()
         # Test the time created equals the current time approx.
         self.assertAlmostEqual(m.created_at.timestamp(), ct_stamp, 0)
@@ -49,15 +48,9 @@ class TestBaseModel(unittest.TestCase):
     def test_updated_at_save(self):
         """ Test `updated_at` value in  `save` method """
         m1 = BaseModel()
-        diff = m1.updated_at - m1.created_at
-        self.assertEqual(m1.created_at, m1.updated_at)
-        self.assertAlmostEqual(diff.total_seconds(), 0, 2)
-        sleep(0.1)  # sleep by 0.1s
+        updated_at_1 = m1.updated_at
         m1.save()
-        diff = m1.updated_at - m1.created_at
-        self.assertNotEqual(m1.created_at, m1.updated_at)
-        # test the difference should be 0.1 approx.
-        self.assertAlmostEqual(diff.total_seconds(), 0.1, 0)
+        self.assertNotEqual(updated_at_1, m1.updated_at)
 
     def test_to_dict(self):
         """ Test `to_dict` method """
