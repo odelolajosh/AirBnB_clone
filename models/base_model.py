@@ -12,10 +12,18 @@ class BaseModel:
     The `BaseModel` class defines all common attributes/methods
     for other classes
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """"Initialize attribute for `BaseModel` class"""
-        self.id = str(uuid.uuid4())
-        self.updated_at = self.created_at = datetime.now()
+        if kwargs:  # kwargs?
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key in ["created_at", "updated_at"]:
+                        setattr(self, key, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.updated_at = self.created_at = datetime.now()
 
     def __str__(self):
         """Return the string representation of the class"""
