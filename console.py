@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 The console module provides the `HBNBCommand` class for AirBnb
 command intepreter.
