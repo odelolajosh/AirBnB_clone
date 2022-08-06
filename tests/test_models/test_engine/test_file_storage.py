@@ -67,6 +67,7 @@ class TestFileStorage(unittest.TestCase):
             instance_key = cls.__name__ + "." + instance.id
             self.fs.new(instance)
             c_json[instance_key] = instance.to_dict()
+
         self.fs.save()
         with open(test_json, "r") as fp:
             self.assertEqual(json.load(fp), c_json)
