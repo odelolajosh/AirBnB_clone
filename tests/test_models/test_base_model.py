@@ -3,7 +3,6 @@
 This module contains unittests for the `BaseModel` class
 """
 from datetime import datetime
-from time import sleep
 import unittest
 from models.base_model import BaseModel
 
@@ -68,6 +67,20 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(m_json["created_at"], str)
         self.assertIsInstance(m_json["updated_at"], str)
         self.assertIn("__class__", m_json)
+
+    def test_instance_by_dict(self):
+        """ Check instantiation by dictionary """
+        m1 = BaseModel()
+        m1.name = "First"
+        m1.age = 89
+        m1_json = m1.to_dict()
+
+        m2 = BaseModel(**m1_json)
+        self.assertEqual(m1.name, m2.name)
+        self.assertEqual(m1.age, m2.age)
+        # `m1` and `m2` have the same attributes
+        self.assertDictEqual(m1_json, m2.to_dict())
+        self.assertEqual(str(m1), str(m2))
 
 
 if __name__ == "__main__":
