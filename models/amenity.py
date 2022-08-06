@@ -6,4 +6,5 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
+    """ Defines a `Amenity` class """
     name = ""

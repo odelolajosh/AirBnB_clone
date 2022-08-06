@@ -56,6 +56,6 @@ class FileStorage:
                     'Place': Place,
                     'Review': Review
                 }
-                for k,v in json.load(fp).items():
+                for k, v in json.load(fp).items():
                     cls_s = k.split(".")[0]
                     self.new(c_names[cls_s](**v))
