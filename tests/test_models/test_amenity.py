@@ -24,6 +24,10 @@ class TestAmenity(unittest.TestCase):
         """ Test presence of required attributes """
         self.assertTrue(hasattr(self.a, 'name'))
 
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.a.name, "")
+
     def test_to_str(self):
         """ Test that the str method has the correct output """
         string = "[{}] ({}) {}".format(self.name, self.a.id, self.a.__dict__)

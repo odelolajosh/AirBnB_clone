@@ -30,6 +30,13 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.u, 'created_at'))
         self.assertTrue(hasattr(self.u, 'updated_at'))
 
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.u.email, "")
+        self.assertEqual(self.u.password, "")
+        self.assertEqual(self.u.first_name, "")
+        self.assertEqual(self.u.last_name, "")
+
     def test_to_str(self):
         """ Test that the str method has the correct output """
         string = "[{}] ({}) {}".format(self.name, self.u.id, self.u.__dict__)

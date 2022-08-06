@@ -34,6 +34,20 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(self.pl, 'longitude'))
         self.assertTrue(hasattr(self.pl, 'amenity_ids'))
 
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.pl.city_id, "")
+        self.assertEqual(self.pl.user_id, "")
+        self.assertEqual(self.pl.name, "")
+        self.assertEqual(self.pl.description, "")
+        self.assertEqual(self.pl.number_rooms, 0)
+        self.assertEqual(self.pl.number_bathrooms, 0)
+        self.assertEqual(self.pl.max_guest, 0)
+        self.assertEqual(self.pl.price_by_night, 0)
+        self.assertEqual(self.pl.latitude, 0.0)
+        self.assertEqual(self.pl.longitude, 0.0)
+        self.assertEqual(self.pl.amenity_ids, [])
+
     def test_to_str(self):
         """ Test that the str method has the correct output """
         string = "[{}] ({}) {}".format(self.name, self.pl.id, self.pl.__dict__)

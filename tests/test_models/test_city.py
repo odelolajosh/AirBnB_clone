@@ -25,6 +25,11 @@ class TestCity(unittest.TestCase):
         self.assertTrue(hasattr(self.c, 'state_id'))
         self.assertTrue(hasattr(self.c, 'name'))
 
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.c.state_id, "")
+        self.assertEqual(self.c.name, "")
+
     def test_to_str(self):
         """ Test that the str method has the correct output """
         string = "[{}] ({}) {}".format(self.name, self.c.id, self.c.__dict__)

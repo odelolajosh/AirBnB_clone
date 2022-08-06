@@ -26,6 +26,12 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(self.r, 'user_id'))
         self.assertTrue(hasattr(self.r, 'text'))
 
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.r.place_id, "")
+        self.assertEqual(self.r.user_id, "")
+        self.assertEqual(self.r.text, "")
+
     def test_to_str(self):
         """ Test that the str method has the correct output """
         string = "[{}] ({}) {}".format(self.name, self.r.id, self.r.__dict__)
