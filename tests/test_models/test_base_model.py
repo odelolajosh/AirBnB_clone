@@ -82,6 +82,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertDictEqual(m1_json, m2.to_dict())
         self.assertEqual(str(m1), str(m2))
 
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        m = BaseModel()
+        string = "[{}] ({}) {}".format(BaseModel.__name__, m.id, m.__dict__)
+        self.assertEqual(string, str(m))
+
 
 if __name__ == "__main__":
     unittest.main()
