@@ -39,6 +39,23 @@ class FileStorage:
         """ Deserializes the JSON file to `__objects` """
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as fp:
+                from models.amenity import Amenity
                 from models.base_model import BaseModel
-                for values in json.load(fp).values():
-                    self.new(BaseModel(**values))
+                from models.city import City
+                from models.place import Place
+                from models.review import Review
+                from models.state import State
+                from models.user import User
+
+                c_names = {
+                    'BaseModel': BaseModel,
+                    'User': User,
+                    'State': State,
+                    'City': City,
+                    'Amenity': Amenity,
+                    'Place': Place,
+                    'Review': Review
+                }
+                for k,v in json.load(fp).items():
+                    cls_s = k.split(".")[0]
+                    self.new(c_names[cls_s](**v))
