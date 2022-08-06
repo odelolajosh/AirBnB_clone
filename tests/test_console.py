@@ -5,6 +5,7 @@ This module contains unittests for the `BaseModel` class
 from io import StringIO
 import unittest
 from unittest.mock import patch
+from console import HBNBCommand
 
 
 class TestConsole(unittest.TestCase):
