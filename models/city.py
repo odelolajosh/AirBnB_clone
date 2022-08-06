@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-""" This module provides the User class """
-
-
+"""
+This module provides the `City` class
+"""
 from models.base_model import BaseModel
 
 
