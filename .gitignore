@@ -1,0 +1,8 @@
+# Runner test files
+/test*.py
+
+# Cache files
+*/**/__pycache__
+
+file.json
+*.*.py
