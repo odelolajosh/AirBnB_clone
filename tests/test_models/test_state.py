@@ -23,6 +23,10 @@ class TestState(unittest.TestCase):
     def test_attributes(self):
         """ Test presence of required attributes """
         self.assertTrue(hasattr(self.s, 'name'))
+    
+    def test_defaults(self):
+        """ Test default values """
+        self.assertEqual(self.s.name, "")
 
     def test_to_str(self):
         """ Test that the str method has the correct output """
