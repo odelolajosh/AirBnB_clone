@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         line is interpreted, but after the input prompt is
         generated and issued.
         """
-        matches = re.findall("^(\w+)\.(\w+)\((.*)\)$", line)
+        matches = re.findall(r"^(\w+)\.(\w+)\((.*)\)$", line)
         if matches:  # array is not empty
             [cls, method, params] = matches[0]
             args = params = str(params).strip()
@@ -60,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             return "{} {} {}".format(method, cls, args)
 
         return super().precmd(line)
-    
+
     def do_create(self, arg):
         """ Creates a new instance of `BaseModel` """
         if len(arg) == 0:
@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         m = HBNBCommand.c_names[arg]()
         m.save()
         print(m.id)
-    
+
     def do_show(self, arg):
         """
         Prints the string representation of an instance based
@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
         arr = self.__get_class_args(arg)
         if not arr:
             return False
-        
+
         if len(arr) < 2:
             print("** instance id missing **")
             return False
@@ -106,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arr) < 2:
             print("** instance id missing **")
             return False
-        
+
         cls, id = arr[0], arr[1]
         key = "{}.{}".format(cls, id)
 
@@ -125,15 +125,15 @@ class HBNBCommand(cmd.Cmd):
         cls = None
         if arg:
             arr = self.__get_class_args(arg)
-            if not arr: # class name is not valid?
+            if not arr:     # class name is not valid?
                 return False
             cls = arr[0]
 
-        if not cls: # get all
+        if not cls:     # get all
             print([str(v) for v in storage.all().values()])
         else:
             print([
-                str(v) 
+                str(v)
                 for k, v in storage.all().items()
                 if str(k).split(".")[0] == cls
             ])
@@ -143,11 +143,11 @@ class HBNBCommand(cmd.Cmd):
         arr = self.__get_class_args(arg)
         if not arr:
             return False
-        
+
         if len(arr) < 2:
             print("** instance id missing **")
             return False
-        
+
         cls, id = arr[0], arr[1]
         key = "{}.{}".format(cls, id)
 
@@ -159,33 +159,32 @@ class HBNBCommand(cmd.Cmd):
         if len(arr) < 3:
             print("** attribute name missing **")
             return False
-        
+
         if len(arr) < 4:
             print("** value missing **")
             return False
-        
+
         attr, val = arr[2], arr[3]
         setattr(obj, attr, val)
         obj.save()
-    
+
     def do_count(self, arg):
         """ Get count of persisted instances """
         cls = None
         if arg:
             arr = self.__get_class_args(arg)
-            if not arr: # class name is not valid?
+            if not arr:     # class name is not valid?
                 return False
             cls = arr[0]
 
-        if not cls: # get all
+        if not cls:     # get all
             print(len([str(v) for v in storage.all().values()]))
         else:
             print(len([
-                str(v) 
+                str(v)
                 for k, v in storage.all().items()
                 if str(k).split(".")[0] == cls
             ]))
-
 
     def __get_class_args(self, arg: str):
         """
@@ -201,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
         if s_args[0] not in HBNBCommand.c_names.keys():
             print("** class doesn't exist **")
             return None
-        
+
         return s_args
 
 
