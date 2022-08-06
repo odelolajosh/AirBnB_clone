@@ -13,6 +13,7 @@ class TestAmenity(unittest.TestCase):
     def setUp(self):
         """ Setup the `Amenity` instance """
         self.a = Amenity()
+        self.name = Amenity.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -22,6 +23,11 @@ class TestAmenity(unittest.TestCase):
     def test_attributes(self):
         """ Test presence of required attributes """
         self.assertTrue(hasattr(self.a, 'name'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.a.id, self.a.__dict__)
+        self.assertEqual(string, str(self.a))
 
 
 if __name__ == "__main__":

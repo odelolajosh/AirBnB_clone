@@ -13,6 +13,7 @@ class TestPlace(unittest.TestCase):
     def setUp(self):
         """ Setup the `Place` instance """
         self.pl = Place()
+        self.name = Place.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -32,6 +33,11 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(self.pl, 'latitude'))
         self.assertTrue(hasattr(self.pl, 'longitude'))
         self.assertTrue(hasattr(self.pl, 'amenity_ids'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.pl.id, self.pl.__dict__)
+        self.assertEqual(string, str(self.pl))
 
 
 if __name__ == "__main__":

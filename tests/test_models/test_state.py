@@ -13,6 +13,7 @@ class TestState(unittest.TestCase):
     def setUp(self):
         """ Setup the state instance """
         self.s = State()
+        self.name = State.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -22,6 +23,11 @@ class TestState(unittest.TestCase):
     def test_attributes(self):
         """ Test presence of required attributes """
         self.assertTrue(hasattr(self.s, 'name'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.s.id, self.s.__dict__)
+        self.assertEqual(string, str(self.s))
 
 
 if __name__ == "__main__":

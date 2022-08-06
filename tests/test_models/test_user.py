@@ -13,6 +13,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         """ Setup the user instance """
         self.u = User()
+        self.name = User.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -28,6 +29,11 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.u, 'id'))
         self.assertTrue(hasattr(self.u, 'created_at'))
         self.assertTrue(hasattr(self.u, 'updated_at'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.u.id, self.u.__dict__)
+        self.assertEqual(string, str(self.u))
 
 
 if __name__ == "__main__":

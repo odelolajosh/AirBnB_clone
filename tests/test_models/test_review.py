@@ -13,6 +13,7 @@ class TestReview(unittest.TestCase):
     def setUp(self):
         """ Setup the city instance """
         self.r = Review()
+        self.name = Review.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -24,6 +25,11 @@ class TestReview(unittest.TestCase):
         self.assertTrue(hasattr(self.r, 'place_id'))
         self.assertTrue(hasattr(self.r, 'user_id'))
         self.assertTrue(hasattr(self.r, 'text'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.r.id, self.r.__dict__)
+        self.assertEqual(string, str(self.r))
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ class TestCity(unittest.TestCase):
     def setUp(self):
         """ Setup the city instance """
         self.c = City()
+        self.name = City.__name__
 
     def test_new_instance(self):
         """ Test default instantiation if a `BaseModel` """
@@ -23,6 +24,11 @@ class TestCity(unittest.TestCase):
         """ Test presence of required attributes """
         self.assertTrue(hasattr(self.c, 'state_id'))
         self.assertTrue(hasattr(self.c, 'name'))
+
+    def test_to_str(self):
+        """ Test that the str method has the correct output """
+        string = "[{}] ({}) {}".format(self.name, self.c.id, self.c.__dict__)
+        self.assertEqual(string, str(self.c))
 
 
 if __name__ == "__main__":
