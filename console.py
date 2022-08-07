@@ -41,6 +41,54 @@ class HBNBCommand(cmd.Cmd):
         print()
         return True
 
+    def help_show(self):
+        """ Help for the `show` command """
+        h_msg = [
+            "Prints the string rep of a class instance based on the id.",
+            "Usage: show <class name> <id>"
+        ]
+        print("\n".join(h_msg))
+
+    def help_all(self):
+        """ Help for the `all` command """
+        h_msg = [
+            "Prints all string rep of all instances optionally with class.",
+            "Usage: all <class name?>"
+        ]
+        print("\n".join(h_msg))
+
+    def help_create(self):
+        """ Help for the `create` command """
+        h_msg = [
+            "Creates a new instance of a class.",
+            "Usage: create <class name>"
+        ]
+        print("\n".join(h_msg))
+
+    def help_destroy(self):
+        """ Help for the `destroy` command """
+        h_msg = [
+            "Deletes a new instance of a class using id.",
+            "Usage: destroy <class name> <id>"
+        ]
+        print("\n".join(h_msg))
+
+    def help_update(self):
+        """ Help for the `update` command """
+        h_msg = [
+            "Updates an instance of a class using id and key-value pair.",
+            "Usage: update <class name> <id> <key> <value>"
+        ]
+        print("\n".join(h_msg))
+
+    def help_count(self):
+        """ Help for the `count` command """
+        h_msg = [
+            "Display the count instances in a class.",
+            "Usage: count <class name>"
+        ]
+        print("\n".join(h_msg))
+
     def emptyline(self):
         """ Respond to empty line command """
         pass
