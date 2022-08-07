@@ -5,4 +5,7 @@ The console
 create your data model
 manage (create, update, destroy, etc) objects via a console / command interpreter
 store and persist objects to a file (JSON file).
-## 
+## Description of the command interpreter
+- how to start it
+- how to use it
+- examples
