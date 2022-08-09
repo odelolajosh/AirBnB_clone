@@ -48,8 +48,13 @@ class TestBaseModel(unittest.TestCase):
         """ Test `updated_at` value in  `save` method """
         m1 = BaseModel()
         updated_at_1 = m1.updated_at
+        created_at_1 = m1.created_at
         m1.save()
+        self.assertEqual(created_at_1, m1.created_at)
         self.assertNotEqual(updated_at_1, m1.updated_at)
+        m1_dict = m1.to_dict()
+        updated_at_iso = datetime.isoformat(m1.updated_at)
+        self.assertEqual(m1_dict["updated_at"], updated_at_iso)
 
     def test_to_dict(self):
         """ Test `to_dict` method """
