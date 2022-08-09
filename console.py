@@ -208,12 +208,18 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return False
 
-        if len(arr) < 4:
+        dict = self.__parse_dict(arr[2])
+
+        if not dict and len(arr) < 4:
             print("** value missing **")
             return False
 
-        attr, val = arr[2], arr[3]
-        setattr(obj, attr, val)
+        if not dict:
+            attr, val = arr[2], arr[3]
+            dict = [[attr, val]]
+
+        for [attr, val] in dict:
+            setattr(obj, attr, val)
         obj.save()
 
     def do_count(self, arg):
@@ -243,13 +249,48 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return None
 
-        s_args = shlex.split(arg)
+        d_split = re.findall(r"^(.+)\s(\{.+\})", arg)
+        if d_split:
+            rest, dict = d_split[0]
+            s_args = shlex.split(rest) + [dict]
+        else:
+            s_args = shlex.split(arg)
 
         if s_args[0] not in HBNBCommand.c_names.keys():
             print("** class doesn't exist **")
             return None
 
         return s_args
+
+    def __parse_dict(self, arg: str):
+        """
+        Parse a dictionary like argument
+        """
+        if not arg:
+            return None
+
+        if re.match(r"\{.*\}", arg) is None:            # not in dict format
+            return None
+
+        unbraced = arg.rstrip("}").lstrip("{").strip()
+        normalized = unbraced.replace(", ", ",").replace(": ", ":")
+        argv = [k_v.split(":") for k_v in normalized.split(",")]
+        if not all([len(kv) == 2 for kv in argv]):
+            return None
+
+        # normalized argv
+        for i, pair in enumerate(argv):
+            [key, value] = pair
+            argv[i][0] = key.strip("'").strip('"')
+            if not re.match(r"[\'|\"].*[\'|\"]", value):    # is not quoted
+                if re.match(r"^\d+$", value):    # is an int
+                    argv[i][1] = int(value)
+                elif re.match(r"^\d+\.\d+?$", value):    # is a float
+                    argv[i][1] = float(value)
+            else:    # quoted, taken as str
+                argv[i][1] = value.strip("'").strip('"')
+
+        return argv
 
 
 if __name__ == "__main__":
