@@ -104,7 +104,11 @@ class HBNBCommand(cmd.Cmd):
             [cls, method, params] = matches[0]
             args = params = str(params).strip()
             if params:
-                args = params.replace(", ", " ")
+                if re.match(r".+\{.*\}", params):
+                    args = params.replace(", ", " ", 1)
+                else:
+                    args = params.replace(", ", " ")
+
             return "{} {} {}".format(method, cls, args)
 
         return super().precmd(line)
