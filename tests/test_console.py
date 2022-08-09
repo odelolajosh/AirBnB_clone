@@ -44,6 +44,44 @@ class TestConsole(unittest.TestCase):
             os.remove(test_json)
         except Exception:
             pass
+    
+    def test_quit(self):
+        """ Test the `quit` command """
+        with patch('sys.stdout', new=StringIO()) as f:
+            console = HBNBCommand()
+            console.onecmd("quit")
+            f.seek(0)
+            line = f.readline()
+            self.assertEqual(line, '')
+    
+    def test_EOF(self):
+        """ Test the `Ctrl + D` command """
+        with patch('sys.stdout', new=StringIO()) as f:
+            console = HBNBCommand()
+            console.onecmd("EOF")
+            f.seek(0)
+            line = f.readline()
+            self.assertEqual(line, '\n')
+    
+    def test_empty(self):
+        """ Test the `empty line` command """
+        with patch('sys.stdout', new=StringIO()) as f:
+            console = HBNBCommand()
+            console.onecmd("")
+            f.seek(0)
+            line = f.readline()
+            self.assertEqual(line, '')
+    
+    def test_help(self):
+        """ Test the `help` command """
+        with patch('sys.stdout', new=StringIO()) as f:
+            console = HBNBCommand()
+            console.onecmd("help")
+            f.seek(0)
+            line = f.read()
+            expectedIn = "Documented commands (type help <topic>):"
+            self.assertIn(expectedIn, line)
+        
 
     def test_create(self):
         """ Test the `create` command """
@@ -219,7 +257,7 @@ class TestConsole(unittest.TestCase):
             ]
             expected = str(c_all_pl) + '\n'
             self.assertEqual(actual, expected)
-
+    
     def test_all_with_invalid_args(self):
         """ Test the `all` command with no or invalid arguments """
         with patch('sys.stdout', new=StringIO()) as f:
