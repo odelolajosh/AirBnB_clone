@@ -9,8 +9,9 @@
 * [0x02 Environment](#0x02-Environment)
 * [0x03 Installation](#0x03-Installation)
 * [0x04 Testing](#0x04-Testing)
-* [0x05 Usage](#0x05-Usage)
-* [0x06 Authors](#0x06-Authors)
+* [0x05 Web](#)
+* [0x06 Usage](#0x06-Usage)
+* [0x07 Authors](#0x07-Authors)
 
 
 ### 0x01 Introduction
@@ -150,7 +151,10 @@ To run the tests in non-interactive mode, and discover all the test, you can use
 python3 -m unittest discover tests
 ```
 
-### 0x05 Usage
+### 0x05 Web
+The clone has a web implementation. Check working progress [here](https://odelolajosh.github.io/AirBnB_clone/web_static/)
+
+### 0x06 Usage
 
 * Start the console in interactive mode:
 
@@ -264,7 +268,7 @@ e952b772-80a5-41e9-b728-6bc4dc5c21b4
 
 ```
 
-### 0x06 Authors
+### 0x07 Authors
 
 <details>
     <summary>Joshua Odelola</summary>
